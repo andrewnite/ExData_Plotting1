@@ -10,6 +10,14 @@ filteredPowerConsumptionData <- powerConsumptionData[as.Date(powerConsumptionDat
 filteredPowerConsumptionData$Date_time <- strptime(paste(filteredPowerConsumptionData$Date,filteredPowerConsumptionData$Time), "%d/%m/%Y %H:%M:%S")
 
 # Create a plot and save as png
-png(filename="plot2.png", width=480, height=480, units="px")
-plot(filteredPowerConsumptionData$Date_time, as.numeric(filteredPowerConsumptionData$Global_active_power),type="l",xlab="",ylab="Global Active Power (kilowatts)")
+png(filename="plot3.png", width=480, height=480, units="px")
+plot(filteredPowerConsumptionData$Date_time, as.numeric(filteredPowerConsumptionData$Sub_metering_1),type="l",xlab="",ylab="Energy sub metering")
+lines(filteredPowerConsumptionData$Date_time, as.numeric(filteredPowerConsumptionData$Sub_metering_2), col="red")
+lines(filteredPowerConsumptionData$Date_time, as.numeric(filteredPowerConsumptionData$Sub_metering_3), col="blue")
+
+# Add a legend
+legend("topright", lty = c(1,1),
+       legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), 
+       col=c("black", "red", "blue"))
+
 dev.off()
